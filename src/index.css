@@ -77,7 +77,6 @@ h6{
   border: 2px solid var(--clr-focussed);
   background: transparent;
 }
-
 @media screen and (min-width: 768px ) {
   body{
     font-size: 1rem;
