@@ -1,20 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { IoSearchOutline } from "react-icons/io5";
 
 const Products = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+
 
   const {isLoading, data: products = [], refetch} = useQuery({
     queryKey: ["allProducts", filterQuery],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/products`);
+      const res = await axios.get(`http://localhost:5000/products?q=${searchQuery}`);
       console.log(res.data);
       return res.data;
-    }
+    },
   })
+
+
+  const handleSearchChange = (e) =>  {
+    setSearchQuery(e.target.value);
+    refetch();
+  }
 
 
   return (
@@ -28,6 +36,8 @@ const Products = () => {
             type="text"
             placeholder="Search here..."
             className="border-2 py-3 px-6 rounded-full outline-none min-w-72 md:min-w-96"
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
           <button type="submit" className="absolute top-1/2 -translate-y-1/2 right-5 text-2xl">
           <IoSearchOutline  />
