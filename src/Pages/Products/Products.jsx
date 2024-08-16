@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
@@ -5,43 +6,41 @@ import ProductCard from "./ProductCard";
 import { IoSearchOutline } from "react-icons/io5";
 import ReactPaginate from "react-paginate";
 import "./pagination.css";
+import { useLoaderData } from "react-router-dom";
 
 
 const Products = () => {
-  const [itemOffset, setItemOffset] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const {count} = useLoaderData();
 
+  const itemsPerPage = 8;
+  const numberOfPages = Math.ceil(count / itemsPerPage);
 
   const {isLoading, data: products = [], refetch} = useQuery({
-    queryKey: ["allProducts", filterQuery],
+    queryKey: ["allProducts", searchQuery, currentPage, itemsPerPage],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/products?q=${filterQuery}`);
+      const res = await axios.get(`http://localhost:5000/products?q=${filterQuery}&page=${currentPage}&size=${itemsPerPage}`);
       console.log(res.data);
       return res.data;
     },
   })
 
-  // pagination
-  const itemsPerPage = 8;
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = products.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(products.length / itemsPerPage);
-
   const handlePageClick = (e) => {
-    const newOffset = (e.selected * itemsPerPage) % products.length;
-    setItemOffset(newOffset);
+    setCurrentPage(e.selected);
+    refetch();
   }
 
   // search functionality
   const handleSearchChange = (e) =>  {
     setSearchQuery(e.target.value);
   }
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setFilterQuery(searchQuery);
-    setItemOffset("");
-    setItemOffset(0);
+    setCurrentPage(0);
     refetch();
   }
 
@@ -67,22 +66,22 @@ const Products = () => {
      {/* Products */}
       <div className="mt-4 md:mt-10 lg:mt-12">
         {isLoading ? ( 
-          <div>Loading </div> 
-        ) : currentItems.length > 0 ? (
+          <div className="mb-[100vh]">Loading </div> 
+        ) : products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center md:justify-between gap-y-16 gap-x-4">
-            {currentItems.map((product) => <ProductCard key={product._id} product={product} />)}
+            {products.map((product) => <ProductCard key={product._id} product={product} />)}
           </div>
         ): (<h4 className="mt-10 text-[var(--clr-warning)]">No Such Product Found <br/> <br/> <small className="text-[var(--clr-primary)] mt-4">Refresh or Search other Products</small> </h4>)}
       </div>
 
       {/* Pagination */}
-      {products.length > itemsPerPage && ( 
+       
         <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={pageCount}
+        pageCount={numberOfPages}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
         containerClassName="pagination-container"
@@ -91,7 +90,7 @@ const Products = () => {
         previousLinkClassName="previous-anchor"
         nextLinkClassName="next-anchor"
       />
-      )}
+      
     </div>
   );
 };
