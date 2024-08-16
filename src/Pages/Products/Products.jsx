@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
+import { IoSearchOutline } from "react-icons/io5";
 
 const Products = () => {
   const [filterQuery, setFilterQuery] = useState("");
@@ -19,10 +20,23 @@ const Products = () => {
   return (
     <div>
       
-
+       {/* search bar */}
+       <div className="border bg-[var(--bg-secondary)] py-16 px-4 md:px-10 lg:px-12 flex flex-col gap-6 justify-center items-center text-center">
+          <h1>Discover What You Need</h1>
+        <form className="relative">
+          <input
+            type="text"
+            placeholder="Search here..."
+            className="border-2 py-3 px-6 rounded-full outline-none min-w-72 md:min-w-96"
+          />
+          <button type="submit" className="absolute top-1/2 -translate-y-1/2 right-5 text-2xl">
+          <IoSearchOutline  />
+          </button>
+        </form>
+      </div>
 
      {/* Products */}
-      <div className="">
+      <div className="mt-4 md:mt-10 lg:mt-12">
         {isLoading ? ( 
           <div>Loading </div> 
         ) : (
