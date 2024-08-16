@@ -10,12 +10,12 @@
   --clr-primary: #171515;
   --clr-secondary: #555555;
   --clr-light-gray:#c1bebe;
-  --clr-focussed: #FF1749;
+  --clr-focussed: #28C8A4;
 
   --clr-white: #ffffff;
 
   /* background-colors */
-  --bg-primary: #F6F4FE;
+  --bg-primary: #f4f5f5;
   --bg-secondary: #e0e0f1;
   --clr-warning: #F7B217;
   --clr-success: #51b6ca;
@@ -51,7 +51,7 @@ h3{
   font-size: 1.75em;
 }
 h4{
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 h5{
   font-size: 1.2em;
