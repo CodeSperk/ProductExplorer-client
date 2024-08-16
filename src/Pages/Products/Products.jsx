@@ -18,12 +18,15 @@ const Products = () => {
     },
   })
 
-
   const handleSearchChange = (e) =>  {
     setSearchQuery(e.target.value);
     refetch();
   }
-
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchQuery(searchQuery);
+    refetch();
+  }
 
   return (
     <div>
@@ -31,7 +34,7 @@ const Products = () => {
        {/* search bar */}
        <div className="border bg-[var(--bg-secondary)] py-16 px-4 md:px-10 lg:px-12 flex flex-col gap-6 justify-center items-center text-center">
           <h1>Discover What You Need</h1>
-        <form className="relative">
+        <form onSubmit={handleSearchSubmit} className="relative">
           <input
             type="text"
             placeholder="Search here..."
