@@ -1,13 +1,14 @@
-# ProductExplorer Backend
+# ProductExplorer Frontend
 
-This is the backend server for the ProductExplorer application, a platform for searching and filtering products. The backend is built using Node.js, Express, and MongoDB.
+This is the frontend for the ProductExplorer application, a platform for searching and filtering products. The frontend is built using React, Vite, Tailwind CSS, and other modern libraries.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
-- [Environment Variables](#environment-variables)
-- [API Endpoints](#api-endpoints)
+- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Dependencies](#dependencies)
 - [Additional Notes](#additional-notes)
 - [License](#license)
 
@@ -15,12 +16,15 @@ This is the backend server for the ProductExplorer application, a platform for s
 
 - Node.js (v14 or above)
 - npm (v6 or above)
-- MongoDB Atlas account
-- A `.env` file with the necessary environment variables (see [Environment Variables](#environment-variables))
 
 ## Setup Instructions
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/product-explorer-backend.git
-   cd product-explorer-backend
+   git clone https://github.com/your-username/product-explorer-frontend.git
+   cd product-explorer-frontend
+
+2. **Install dependencies:**
+  npm install
+3. **Start the development server:**
+  npm run dev
