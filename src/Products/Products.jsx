@@ -22,6 +22,8 @@ const Products = () => {
   const itemsPerPage = 8;
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
+  console.log(typeof maxPrice);
+
   const {
     isLoading,
     data: products = [],
@@ -96,61 +98,58 @@ const Products = () => {
       </div>
 
       {/* Filter and Sort Options */}
-      <div className="flex flex-col md:flex-row justify-between mb-6 gap-4">
-        <div className="flex flex-wrap gap-2">
-          <div className="w-full md:w-fit flex flex-wrap gap-2">
-            <select
-              onChange={(e) => setBrand(e.target.value)}
-              value={brand}
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-52"
-            >
-              <option value="">All Brands</option>
-              <option value="BrandA">Brand A</option>
-              <option value="BrandB">Brand B</option>
-              {/* Add more brand options here */}
-            </select>
+      <div className="flex justify-between flex-wrap gap-2">
+        <select
+          onChange={(e) => setBrand(e.target.value)}
+          value={brand}
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-44"
+        >
+          <option value="">All Brands</option>
+          <option value="SoundMagic">SoundMagic</option>
+          <option value="SoundWave">SoundWave</option>
+          <option value="TimeTech">TimeTech</option>
+          <option value="CaptureIt">CaptureIt</option>
+        </select>
 
-            <select
-              onChange={(e) => setCategory(e.target.value)}
-              value={category}
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-52"
-            >
-              <option value="">All Categories</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Wearables">Wearables</option>
-              <option value="Kitchen Appliances">Kitchen Appliances</option>
-              <option value="Office Accessories">Office Accessories</option>
-              <option value="Home Appliances">Home Appliances</option>
-              <option value="Personal Care">Personal Care</option>
-            </select>
-          </div>
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-44"
+        >
+          <option value="">All Categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Wearables">Wearables</option>
+          <option value="Kitchen Appliances">Kitchen Appliances</option>
+          <option value="Office Accessories">Office Accessories</option>
+          <option value="Home Appliances">Home Appliances</option>
+          <option value="Personal Care">Personal Care</option>
+        </select>
 
-          <div className="flex w-full md:w-fit flex-wrap gap-2 justify-between">
-            <input
-              type="number"
-              placeholder="Min Price"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-52"
-            />
-            <input
-              type="number"
-              placeholder="Max Price"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-52"
-            />
-          </div>
-        </div>
+        <input
+          type="number"
+          placeholder="Min Price"
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-44"
+        />
+        <input
+          type="number"
+          placeholder="Max Price"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-44"
+        />
 
-        <div>
-          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy} className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-52">
-            <option value="">Sort by</option>
-            <option value="priceLowHigh">Price: Low to High</option>
-            <option value="priceHighLow">Price: High to Low</option>
-            <option value="dateAdded">Newest First</option>
-          </select>
-        </div>
+        <select
+          onChange={(e) => setSortBy(e.target.value)}
+          value={sortBy}
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--clr-focussed)] w-full md:w-44"
+        >
+          <option value="">Sort by</option>
+          <option value="priceLowHigh">Price: Low to High</option>
+          <option value="priceHighLow">Price: High to Low</option>
+          <option value="dateAdded">Newest First</option>
+        </select>
       </div>
 
       {/* Products */}

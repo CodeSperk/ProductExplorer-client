@@ -10,6 +10,7 @@ const ProductCard = ({product}) => {
       {/* product  Image */}
       <div className="w-full overflow-hidden relative">
       <img src={productImage} alt={productName} className="rounded-t-lg hover:scale-110 duration-500"/>
+      <small className="absolute top-4 left-0  bg-[var(--clr-focussed)] text-white px-1 rounded-r">{brandName}</small>
       </div>
 
       {/* Product info */}
