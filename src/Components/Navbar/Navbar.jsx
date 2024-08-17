@@ -9,19 +9,18 @@ import {
 } from "@material-tailwind/react";
 
 import "./navbar.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
-// import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { MdDashboard } from "react-icons/md";
 import { AiOutlineLogout } from "react-icons/ai";
-// import useUserRole from "../../Hooks/useUserRole";
+import { AuthContext } from "../../Provider/AuthProvider";
+import avatar from "../../assets/avatar.png";
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { user, logOutUser } = useAuth();
+  const { user, logOutUser } = useContext(AuthContext);
   // const [userRole, isUserLoading] = useUserRole(user);
 
   // console.log(userRole === "admin");
@@ -33,20 +32,20 @@ const Navbar = () => {
   }, []);
 
   // to logout user
-  // const handleLogOut = () => {
-  //   logOutUser()
-  //     .then(() => {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Logout Success",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const handleLogOut = () => {
+    logOutUser()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logout Success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const menuList = (
     <>
@@ -92,18 +91,40 @@ const Navbar = () => {
 
           {/*user profile and Conditional login-register*/}
 
-          <div className="hidden gap-2 lg:flex items-center">
-            <Link to="/login">
-              <button className=" bg-[var(--bg-secondary)] hover:text-[var(--clr-focussed)] py-2 px-4 rounded-sm hover:scale-95 duration-300 font-medium">
-                Login
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className="bg-[var(--clr-focussed)] hover:scale-95 duration-300 font-medium text-white py-2 px-4 rounded-sm">
-                Register
-              </button>
-            </Link>
-          </div>
+          {user ? (
+            <Menu
+              open={isMenuOpen}
+              handler={setIsMenuOpen}
+              placement="bottom-end"
+            >
+              <MenuHandler>
+                <div className="w-12 h-12 rounded-full border-4 border-[var(--clr-white)] bg-[var(--bg-secondary)] cursor-pointer">
+                  <img
+                    src={user?.photoURL || avatar}
+                    alt="User's Profile Picture"
+                    className="rounded-full w-full h-full"
+                  />
+                </div>
+              </MenuHandler>
+              <MenuList className="p-4 text-[var(--clr-primary)]">
+                <div className="outline-none">
+                  <p className="text-center">{user?.displayName}</p>
+                <button className="w-full flex items-center gap-4 text-base font-semibold border-t-2 pt-2 text-[var(--clr-focussed)] mt-16 hover:underline" onClick={handleLogOut}>
+                 <AiOutlineLogout className="text-xl -rotate-90"/> Logout
+                </button>
+                </div>
+              </MenuList>
+            </Menu>
+          ) : (
+            <div className="hidden gap-2 lg:flex items-center">
+              <Link to="/login">
+                <button className=" bg-[var(--bg-secondary)] hover:text-[var(--clr-focussed)] py-2 px-4 rounded-sm hover:scale-95 duration-300 font-medium">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="bg-[var(--clr-focussed)] hover:scale-95 duration-300 font-medium text-white py-2 px-4 rounded-sm">Register</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
@@ -112,14 +133,16 @@ const Navbar = () => {
         <div className="shadow-3xl border-2 border-t-0 p-4 md:p-8">
           {menuList}
 
-          <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-            <Link to="/login" className="w-full">
-              <button className="btn1 w-full lg:w-fit">Login</button>
-            </Link>
-            <Link to="/register" className="w-full">
-              <button className="btn1 w-full lg:w-fit">Register</button>
-            </Link>
-          </div>
+          {!user && (
+            <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+              <Link to="/login" className="w-full">
+                <button className="btn1 w-full lg:w-fit">Login</button>
+              </Link>
+              <Link to="/register" className="w-full">
+                <button className="btn1 w-full lg:w-fit">Register</button>
+              </Link>
+            </div>
+          )}
         </div>
       </Collapse>
     </nav>
