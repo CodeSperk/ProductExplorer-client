@@ -41,7 +41,7 @@ const Products = () => {
       itemsPerPage,
     ],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/products", {
+      const res = await axios.get("https://product-explorer-server.vercel.app/products", {
         params: {
           q: filterQuery,
           brand,
