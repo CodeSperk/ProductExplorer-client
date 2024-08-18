@@ -1,4 +1,5 @@
 # ProductExplorer Frontend
+## [Live Link](https://product-explorer-78d94.web.app)
 
 This is the frontend for the ProductExplorer application, a platform for searching and filtering products. The frontend is built using React, Vite, Tailwind CSS, and other modern libraries.
 
@@ -6,11 +7,6 @@ This is the frontend for the ProductExplorer application, a platform for searchi
 
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
-- [Available Scripts](#available-scripts)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [Additional Notes](#additional-notes)
-- [License](#license)
 
 ## Prerequisites
 
@@ -24,10 +20,7 @@ This is the frontend for the ProductExplorer application, a platform for searchi
    git clone https://github.com/your-username/product-explorer-frontend.git
    cd product-explorer-frontend
 
-2. **Install dependencies:**
-  ```bash
-  npm install
-  
-3. **Start the development server:**
-  ```bash
-  npm run dev
+2. **Install dependencies and run the project:**
+   ```bash
+   npm install
+   npm run dev
