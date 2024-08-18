@@ -98,7 +98,7 @@ const Products = () => {
       </div>
 
       {/* Filter and Sort Options */}
-      <div className="flex justify-between flex-wrap gap-2">
+      <div className="flex md:justify-center flex-wrap gap-2">
         <select
           onChange={(e) => setBrand(e.target.value)}
           value={brand}
