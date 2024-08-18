@@ -27,6 +27,7 @@ This is the frontend for the ProductExplorer application, a platform for searchi
 2. **Install dependencies:**
   ```bash
   npm install
+  
 3. **Start the development server:**
   ```bash
   npm run dev
